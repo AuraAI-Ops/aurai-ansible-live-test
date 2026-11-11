@@ -1,0 +1,16 @@
+---
+- name: Read-only show version
+  hosts: all
+  gather_facts: false
+  connection: netconf
+
+  tasks:
+    - name: Run show version
+      junipernetworks.junos.junos_command:
+        commands:
+          - show version
+      register: show_version
+
+    - name: Print the output
+      debug:
+        var: show_version.stdout_lines
