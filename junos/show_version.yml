@@ -10,6 +10,9 @@
         commands:
           - show version
       register: show_version
+      # Read-only. junos_command refuses any RPC in check mode ("invalid rpc for
+      # running in check_mode"), so a Test (dry run) would fail here otherwise.
+      check_mode: false
 
     - name: Print the output
       debug:
